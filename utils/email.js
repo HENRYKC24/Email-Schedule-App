@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 
+const User = require('../models/userModel');
+
 const { OAuth2 } = google.auth;
 
 const OAuth2Client = new OAuth2(
@@ -21,8 +23,19 @@ const options = {
   refreshToken: process.env.REFRESH_TOKEN,
 };
 
-const sendEmail = (from, subject, message, to) => {
+const sendEmail = (from, subject, message, to, id, toSend) => {
   const { type, user, clientId, clientSecret, refreshToken } = options;
+
+  const updateUser = async () => {
+    const databaseUser = await User.findById(id);
+    await User.findByIdAndUpdate(
+      id,
+      { sentMessageIds: databaseUser.sentMessageIds.concat([toSend.id]) },
+      {
+        runValidators: true,
+      }
+    );
+  };
 
   const accessToken = options.OAuth2Client.getAccessToken();
   const transport = nodemailer.createTransport({
@@ -50,10 +63,13 @@ const sendEmail = (from, subject, message, to) => {
   };
 
   transport.sendMail(mailOptions, (error, result) => {
-    if (error) {
-      console.log('Error: ', error);
+    if (!error) {
+      console.log('Success'); // eslint-disable-line no-console
+      if (toSend) {
+        updateUser();
+      }
     } else {
-      console.log('Success: ', result);
+      console.log('Error: ', error); // eslint-disable-line no-console
     }
     transport.close();
   });

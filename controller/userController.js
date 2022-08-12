@@ -48,7 +48,7 @@ exports.continueMessage = catchAsync(async (req, res, next) => {
 });
 
 exports.getUser = catchAsync(async (req, res) => {
-  const user = await User.findById(req.body.id);
+  const user = await User.findById(req.user.id);
   res.status(200).json({
     status: 'success',
     data: {

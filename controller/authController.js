@@ -12,6 +12,13 @@ const getJWTToken = (id) =>
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
+const cleanRequestData = (req) => {
+  delete req.body.role;
+  delete req.body.active;
+  delete req.body.messagesLeft;
+  delete req.body.sentMessageIds;
+};
+
 const sendResponseWithToken = (user, statusCode, res) => {
   const token = getJWTToken(user._id);
 
@@ -39,9 +46,8 @@ const sendResponseWithToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-  // const { name, email, password, passwordConfirm } = req.body;
+  cleanRequestData(req);
   const newUser = await User.create(req.body);
-
   sendResponseWithToken(newUser, 201, res);
 });
 
@@ -124,7 +130,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const message = `There was a request for change\
    of password due to forgetting it. Click the link below to reset \
    your password: <br><br><a href="${resetURL}">Reset Password</a><br><br>\
-   If you didn't you did not make this request, please ignore this email.`;
+   If you didn't make this request, please ignore this email.`;
 
   try {
     await sendEmail(
