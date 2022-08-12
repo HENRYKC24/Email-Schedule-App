@@ -51,6 +51,12 @@ app.use(
 app.use(express.static(`${__dirname}/public`));
 
 app.use('/api/v1/users', userRouter);
+app.use('/', (req, res, next) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'Welcome to our API service!',
+  });
+});
 
 // HANDLE WRONG ENDPOINTS
 app.all('*', (req, res, next) => {
