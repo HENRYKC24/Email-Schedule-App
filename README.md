@@ -28,7 +28,7 @@ This isn't a counseling session. This isn't a therapy system. It's the best firs
 
 ## Live Demo
 
-[Live Demo Link](https://henry-kc-web-scrapping-app.herokuapp.com/api/v1/events-conferences)
+[Live Demo Link](https://henrykc-mail-scheduler.herokuapp.com/)
 
 ## Run App Locally
 
@@ -81,13 +81,6 @@ All responses come in standard JSON.
 
 # Note: The token is intentionally added to some responses to ease testing purposes with Postman API Tool.
 
-### Some Response Codes
-
-```json
-200: Success
-404: Not Found
-50X: Server Error
-```
 
 ### Example Error Message
 
@@ -107,9 +100,7 @@ http code 200
 {
   "status": "success",
   "dataCount": 2,
-  "data": {
-    // data
-  }
+  "data": {}
 }
 
 ```
