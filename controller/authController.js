@@ -12,6 +12,13 @@ const getJWTToken = (id) =>
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
+const cleanRequestData = (req) => {
+  delete req.body.role;
+  delete req.body.active;
+  delete req.body.messagesLeft;
+  delete req.body.sentMessageIds;
+};
+
 const sendResponseWithToken = (user, statusCode, res) => {
   const token = getJWTToken(user._id);
 
@@ -39,9 +46,8 @@ const sendResponseWithToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-  // const { name, email, password, passwordConfirm } = req.body;
+  cleanRequestData(req);
   const newUser = await User.create(req.body);
-
   sendResponseWithToken(newUser, 201, res);
 });
 
