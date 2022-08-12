@@ -79,9 +79,11 @@ Run `npm run start:prod` to start the local server in production environment
 
 All responses come in standard JSON.
 
+# Note: The token is intentionally added to some responses to ease testing purposes with Postman API Tool.
+
 ### Some Response Codes
 
-```
+```json
 200: Success
 404: Not Found
 50X: Server Error
@@ -89,11 +91,12 @@ All responses come in standard JSON.
 
 ### Example Error Message
 
-```json
 http code 500
+
+```json
 {
-  status: "fail",
-  message: "Internal server error",
+  "status": "fail",
+  "message": "Internal server error"
 }
 ```
 
@@ -111,11 +114,24 @@ http code 200
 
 ```
 
+# HOME ROUTE: GET REQUEST
+
+`https://henrykc-mail-scheduler.herokuapp.com/`
+
+**Response:**
+
+```json
+{
+  "status": "success",
+  "message": "Welcome to our API service!"
+}
+```
+
 # POST REQUESTS:
 
 ### Register A User
 
-`{{URL}}/api/v1/users/signup`
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/signup`
 
 #### Payload
 
@@ -154,7 +170,7 @@ The above endpoint with the payload returns the user as a response
 
 ### Login A User
 
-`{{URL}}/api/v1/users/login`
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/login`
 
 #### Payload
 
@@ -190,7 +206,7 @@ The above endpoint with the payload returns the user as a response
 
 ### Recover User Password
 
-`{{URL}}/api/v1/users/forgot-password`
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/forgot-password`
 
 _Hint: No authentication required. No payload required._
 
@@ -201,12 +217,12 @@ _Hint: No authentication required. No payload required._
   "email": "example1@gmail.com"
 }
 ```
-The above endpoint sends an email with a link to recover/change the password to the provided email in the payload.
 
+The above endpoint sends an email with a link to recover/change the password to the provided email in the payload.
 
 ### Reset password from email message
 
-`{{URL}}/api/v1/users/reset-password/:token`
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/reset-password/:token`
 
 _Hint: The above endpoint will be automatically generated from the email send during forgot password process. It is a post request that require a payload._
 
@@ -218,6 +234,7 @@ _Hint: The above endpoint will be automatically generated from the email send du
   "passwordConfirm": "password12"
 }
 ```
+
 **Response:**
 
 ```json
@@ -239,12 +256,27 @@ _Hint: The above endpoint will be automatically generated from the email send du
 }
 ```
 
-
 # GET REQUESTS:
+
+### Logout A User
+
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users`
+
+_Hint: You must be logged in before you can access this route. No payload is required._
+
+**Response:**
+
+```json
+{
+  "status": "success",
+  "message": "You successfully logged out",
+  "token": "eyJhbGciOiJIUzI1NiIsInR..."
+}
+```
 
 ### Get All Users
 
-`{{URL}}/api/v1/users`
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users`
 
 _Hint: You must be logged in and also an admin before you can access this route. No payload is required._
 
@@ -297,7 +329,7 @@ The above endpoint returns all registered users as a response
 
 ### Get A Single User
 
-`{{URL}}/api/v1/users/:id`
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/:id`
 
 _Hint: You must be logged in and also an admin before you can access this route. No payload is required._
 
@@ -330,7 +362,7 @@ The above endpoint returns a user as a response
 
 ### Change User Password
 
-`{{URL}}/api/v1/users/update-password`
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/update-password`
 
 _Hint: You must be logged in before you can change your password._
 
@@ -372,7 +404,7 @@ The above endpoint returns a user as a response
 
 ### Change User Info (email/name)
 
-`{{URL}}/api/v1/users/update-user`
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/update-user`
 
 _Hint: You must be logged in before you can change your name or email._
 
@@ -411,7 +443,7 @@ The above endpoint returns a user as a response
 
 ### Pause User Email Message
 
-`{{URL}}/api/v1/users/pause-message`
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/pause-message`
 
 _Hint: You must be logged in before you can pause receiving email for mental health tips. No payload is required_
 
@@ -428,7 +460,7 @@ The above endpoint returns a message that your message service has been paused.
 
 ### Continue Receiving Email Message
 
-`{{URL}}/api/v1/users/continue-message`
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/continue-message`
 
 _Hint: You must be logged in before you can continue a paused email for mental health tips. No payload is required_
 
