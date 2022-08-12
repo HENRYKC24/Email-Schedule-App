@@ -29,7 +29,7 @@ mongoose
     sendRandomMessages();
     setInterval(() => {
       sendRandomMessages();
-    }, 10000);
+    }, 1000 * 60);
   });
 
 // RUN SERVER
