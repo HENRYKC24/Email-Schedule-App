@@ -68,6 +68,38 @@ exports.login = catchAsync(async (req, res, next) => {
   sendResponseWithToken(user, 200, res);
 });
 
+exports.logout = catchAsync(async (req, res, next) => {
+  res.cookie('jwt', '', {
+    expires: new Date(Date.now() + 1000),
+    httpOnly: true,
+  });
+
+  const expiredToken = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET, {
+    expiresIn: '1s',
+  });
+
+  const { authorization } = req.headers;
+  let token;
+  if (authorization && authorization.startsWith('Bearer')) {
+    token = authorization.split(' ')[1];
+  }
+
+  if (token) {
+    // jwt.destroy();
+
+    res.status(200).json({
+      status: 'success',
+      message: 'You successfully logged out',
+      token: expiredToken,
+    });
+  } else {
+    res.status(400).json({
+      status: 'fail',
+      message: 'You are not logged in',
+    });
+  }
+});
+
 exports.protect = catchAsync(async (req, res, next) => {
   // 1) Get toke and check if it exists
   const { authorization } = req.headers;
