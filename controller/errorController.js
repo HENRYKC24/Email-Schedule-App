@@ -6,7 +6,9 @@ const handleCastErrorDB = (err) => {
 };
 
 const handleDuplicateFieldsDB = (err) => {
-  const message = `Duplicate field: "${err.keyValue.name}". Please, use a different value.`;
+  const message = `Duplicate field: "${Object.keys(
+    err.keyValue
+  )}". Please, use a different value.`;
   return new AppError(message, 400);
 };
 
@@ -42,7 +44,7 @@ const sendErrorProd = (err, res) => {
   } else {
     // Programming or other unknown error: don't leak error details
     // 1) Log error
-    console.error('ERROR: ', err);
+    console.error('ERROR: ', err); // eslint-disable-line no-console
 
     // 2) Send generic message
     res.status(500).json({
