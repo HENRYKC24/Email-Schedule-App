@@ -102,8 +102,8 @@ http code 500
 
 ### Example success Message
 
-```json
 http code 200
+```json
 {
   "status": "success",
   "dataCount": 2,
