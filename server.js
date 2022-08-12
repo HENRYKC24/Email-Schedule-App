@@ -7,8 +7,8 @@ const app = require('./app');
 const sendRandomMessages = require('./utils/sendRandomMessages');
 
 process.on('uncaughtException', (err) => {
-  console.log('UNCAUGHT EXCEPTION: Server shutting down...');
-  console.log(err.name, '\n', err.message);
+  console.log('UNCAUGHT EXCEPTION: Server shutting down...'); // eslint-disable-line no-console
+  console.log(err.name, '\n', err.message); // eslint-disable-line no-console
   process.exit(1);
 });
 
@@ -25,7 +25,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('MongoDB connection successful');
+    console.log('MongoDB connection successful'); // eslint-disable-line no-console
     sendRandomMessages();
     setInterval(() => {
       sendRandomMessages();
@@ -35,12 +35,12 @@ mongoose
 // RUN SERVER
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
-  console.log(`App running on port ${port}`);
+  console.log(`App running on port ${port}`); // eslint-disable-line no-console
 });
 
 process.on('unhandledRejection', (err) => {
-  console.log('UNHANDLED REJECTION: Server shutting down...');
-  console.log(err.name, '\n', err.message);
+  console.log('UNHANDLED REJECTION: Server shutting down...'); // eslint-disable-line no-console
+  console.log(err.name, '\n', err.message); // eslint-disable-line no-console
   server.close(() => {
     process.exit(1);
   });

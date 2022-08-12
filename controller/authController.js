@@ -124,7 +124,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const message = `There was a request for change\
    of password due to forgetting it. Click the link below to reset \
    your password: <br><br><a href="${resetURL}">Reset Password</a><br><br>\
-   If you didn't you did not make this request, please ignore this email.`;
+   If you didn't make this request, please ignore this email.`;
 
   try {
     await sendEmail(
