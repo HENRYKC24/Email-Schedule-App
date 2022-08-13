@@ -79,8 +79,7 @@ Run `npm run start:prod` to start the local server in production environment
 
 All responses come in standard JSON.
 
-# Note: The token is intentionally added to some responses to ease testing purposes with Postman API Tool.
-
+# Note: The token is intentionally added to some responses to ease testing purposes with Postman API Tool. PLEASE, TEST THE ENDPOINTS WITH POSTMAN APPLICATION
 
 ### Example Error Message
 
@@ -124,6 +123,9 @@ http code 200
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/signup`
 
+### POSTMAN TIPS
+1. Place this code in the `Tests` tab `pm.environment.set("jwt", pm.response.json().token);`
+
 #### Payload
 
 ```json
@@ -162,6 +164,8 @@ The above endpoint with the payload returns the user as a response
 ### Login A User
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/login`
+### POSTMAN TIPS
+1. Place this code in the `Tests` tab `pm.environment.set("jwt", pm.response.json().token);`
 
 #### Payload
 
@@ -199,7 +203,7 @@ The above endpoint with the payload returns the user as a response
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/forgot-password`
 
-_Hint: No authentication required. No payload required._
+_Hint: No authentication required._
 
 #### Payload
 
@@ -214,8 +218,10 @@ The above endpoint sends an email with a link to recover/change the password to 
 ### Reset password from email message
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/reset-password/:token`
+### POSTMAN TIPS
+1. Place this code in the `Tests` tab `pm.environment.set("jwt", pm.response.json().token);`
 
-_Hint: The above endpoint will be automatically generated from the email send during forgot password process. It is a post request that require a payload._
+_Hint: The above endpoint will be automatically generated from the email send during forgot password process. It is a post request that require a payload. Copy the link from your email and paste it in Postman_
 
 #### Payload
 
@@ -252,6 +258,9 @@ _Hint: The above endpoint will be automatically generated from the email send du
 ### Logout A User
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users`
+### POSTMAN TIPS
+1. In the `Authorization` tab, select `Bearer Token` in the `Type` field;
+2. Place this code in the `Tests` tab `pm.environment.set("jwt", pm.response.json().token);`
 
 _Hint: You must be logged in before you can access this route. No payload is required._
 
@@ -268,6 +277,8 @@ _Hint: You must be logged in before you can access this route. No payload is req
 ### Get All Users
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users`
+### POSTMAN TIPS
+1. In the `Authorization` tab, select `Bearer Token` in the `Type` field;
 
 _Hint: You must be logged in and also an admin before you can access this route. No payload is required._
 
@@ -321,6 +332,8 @@ The above endpoint returns all registered users as a response
 ### Get A Single User
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/:id`
+### POSTMAN TIPS
+1. In the `Authorization` tab, select `Bearer Token` in the `Type` field;
 
 _Hint: You must be logged in and also an admin before you can access this route. No payload is required._
 
@@ -354,6 +367,9 @@ The above endpoint returns a user as a response
 ### Change User Password
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/update-password`
+### POSTMAN TIPS
+1. In the `Authorization` tab, select `Bearer Token` in the `Type` field;
+2. Place this code in the `Tests` tab `pm.environment.set("jwt", pm.response.json().token);`
 
 _Hint: You must be logged in before you can change your password._
 
@@ -396,6 +412,8 @@ The above endpoint returns a user as a response
 ### Change User Info (email/name)
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/update-user`
+### POSTMAN TIPS
+1. In the `Authorization` tab, select `Bearer Token` in the `Type` field;
 
 _Hint: You must be logged in before you can change your name or email._
 
@@ -435,6 +453,8 @@ The above endpoint returns a user as a response
 ### Pause User Email Message
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/pause-message`
+### POSTMAN TIPS
+1. In the `Authorization` tab, select `Bearer Token` in the `Type` field;
 
 _Hint: You must be logged in before you can pause receiving email for mental health tips. No payload is required_
 
@@ -452,6 +472,8 @@ The above endpoint returns a message that your message service has been paused.
 ### Continue Receiving Email Message
 
 `https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/continue-message`
+### POSTMAN TIPS
+1. In the `Authorization` tab, select `Bearer Token` in the `Type` field;
 
 _Hint: You must be logged in before you can continue a paused email for mental health tips. No payload is required_
 
@@ -463,6 +485,34 @@ The above endpoint returns a message that your paused service has been resumed.
 {
   "status": "success",
   "message": "Email messages has successfully continued."
+}
+```
+
+### Re-subscribe to Email Message Service
+
+`https://henrykc-mail-scheduler.herokuapp.com/api/v1/users/re-subscribe`
+### POSTMAN TIPS
+1. In the `Authorization` tab, select `Bearer Token` in the `Type` field;
+
+_Hint: You must be logged in before you can re-subscribe email for mental health tips. No payload is required_
+
+The above endpoint returns a success or failure message.
+
+**Response: - Success**
+
+```json
+{
+    "status": "success",
+    "message": "You have successfully re-subscribed!"
+}
+```
+
+**Response: - Failure**
+
+```json
+{
+    "status": "fail",
+    "message": "You already have an active subscription. Please, check if message service is paused!"
 }
 ```
 
