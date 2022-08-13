@@ -54,7 +54,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/', (req, res, next) => {
   res.status(200).json({
     status: 'success',
-    message: 'Welcome to our API service!',
+    message: 'Welcome to Cope Notes Mental Health Support API service!',
   });
 });
 

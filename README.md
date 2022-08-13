@@ -113,7 +113,7 @@ http code 200
 ```json
 {
   "status": "success",
-  "message": "Welcome to our API service!"
+  "message": "Welcome to Cope Notes Mental Health Support API service!",
 }
 ```
 
