@@ -98,3 +98,22 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
+exports.reSubscribe = catchAsync(async (req, res, next) => {
+  const { id } = req.user;
+  const { messagesLeft } = await User.findById(id);
+
+  if (!messagesLeft) {
+    await User.findByIdAndUpdate(id, { messagesLeft: -1 });
+    res.status(200).json({
+      status: 'success',
+      message: 'You have successfully re-subscribed!',
+    });
+  } else {
+    res.status(400).json({
+      status: 'fail',
+      message:
+        'You already have an active subscription. Please, check if message service is paused!',
+    });
+  }
+});

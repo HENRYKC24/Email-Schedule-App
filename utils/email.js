@@ -64,7 +64,6 @@ const sendEmail = (from, subject, message, to, id, toSend) => {
 
   transport.sendMail(mailOptions, (error, result) => {
     if (!error) {
-      console.log('Success'); // eslint-disable-line no-console
       if (toSend) {
         updateUser();
       }
