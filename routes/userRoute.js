@@ -11,6 +11,7 @@ const {
   deleteUser,
   pauseMessage,
   continueMessage,
+  reSubscribe,
 } = userController;
 
 const {
@@ -40,6 +41,7 @@ router.delete('/delete-me', protect, deleteMe);
 router.patch('/update-user', protect, updateMe);
 
 router.patch('/pause-message', protect, pauseMessage);
+router.patch('/re-subscribe', protect, reSubscribe);
 router.patch('/continue-message', protect, continueMessage);
 
 router.route('/').get(protect, restrictTo('admin'), getUsers);
