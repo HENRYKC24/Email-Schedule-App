@@ -1,7 +1,9 @@
 const dotenv = require('dotenv');
-const connection = require('./utils/DBConnection');
 
 dotenv.config();
+const sendRandomMessages = require('./utils/sendRandomMessages');
+
+const connection = require('./utils/DBConnection');
 
 const app = require('./app');
 
@@ -17,6 +19,10 @@ let server = {};
 
 connection.connectToDatabase().then(() => {
   console.log('Database connection successful'); // eslint-disable-line no-console
+  sendRandomMessages();
+  setInterval(() => {
+    sendRandomMessages();
+  }, 1000 * 60);
 });
 
 server = app.listen(port, () => {
