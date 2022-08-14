@@ -2,3 +2,6 @@ node_modules
 config.env
 env
 .env
+build
+coverage
+.nyc_output
