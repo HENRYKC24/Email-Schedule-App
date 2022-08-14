@@ -3,11 +3,7 @@ const request = require('supertest');
 const server = require('../../server');
 const deleteTestUser = require('../../utils/deleteTestUser');
 
-const deleteUser = async () => await deleteTestUser();
-
 const DBConnection = require('../../utils/DBConnection');
-
-let addedNewTestUser = false;
 
 describe('API Test', () => {
   before((done) => {
@@ -28,7 +24,6 @@ describe('API Test', () => {
       .then((res) => {
         addedNewTestUser = true;
         const { body } = res;
-        // console.log(body);
         expect(body.message).to.equal('Token sent to the mail');
         done();
       })
@@ -65,7 +60,6 @@ describe('API Test', () => {
       .then((res) => {
         addedNewTestUser = true;
         const { body } = res;
-        // console.log(body);
         expect(body.data.user.email).to.equal('henrykc24@yahoo.com');
         done();
       })
@@ -78,7 +72,6 @@ describe('API Test', () => {
       .then((res) => {
         addedNewTestUser = true;
         const { body } = res;
-        // console.log(body);
         expect(body.message).to.equal(
           'Welcome to Cope Notes Mental Health Support API service!'
         );
