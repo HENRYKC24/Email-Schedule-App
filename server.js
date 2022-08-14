@@ -1,10 +1,9 @@
 const dotenv = require('dotenv');
+const connection = require('./utils/connectToDatabase');
 
-dotenv.config({ path: './config.env' });
+dotenv.config();
 
-const mongoose = require('mongoose');
 const app = require('./app');
-const sendRandomMessages = require('./utils/sendRandomMessages');
 
 process.on('uncaughtException', (err) => {
   console.log('UNCAUGHT EXCEPTION: Server shutting down...'); // eslint-disable-line no-console
@@ -12,30 +11,15 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-const DB = process.env.MONGODB_REMOTE_SERVER.replace(
-  '<PASSWORD>',
-  process.env.MONGODB_PASSWORD
-);
-
-mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log('MongoDB connection successful'); // eslint-disable-line no-console
-    sendRandomMessages();
-    setInterval(() => {
-      sendRandomMessages();
-    }, 1000 * 60);
-  });
-
 // RUN SERVER
 const port = process.env.PORT || 4000;
-const server = app.listen(port, () => {
-  console.log(`App running on port ${port}`); // eslint-disable-line no-console
+let server = {};
+
+connection.connectToDatabase().then(() => {
+  console.log('Database connection successful');
+  server = app.listen(port, () => {
+    console.log(`App running on port ${port}`); // eslint-disable-line no-console
+  });
 });
 
 process.on('unhandledRejection', (err) => {
@@ -45,3 +29,5 @@ process.on('unhandledRejection', (err) => {
     process.exit(1);
   });
 });
+
+module.exports = server;
