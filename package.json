@@ -4,6 +4,7 @@
   "description": "An application for sending random email messages to clients",
   "main": "server.js",
   "scripts": {
+    "test": "mocha --recursive --timeout 20000 --exit",
     "start:dev": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js"
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "eslint": "^8.16.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
@@ -38,10 +40,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "mocha": "^10.0.0",
-    "mockgoose": "^8.0.4",
     "ndb": "^1.1.5",
-    "prettier": "^2.6.2",
-    "supertest": "^6.2.4"
+    "prettier": "^2.6.2"
   },
   "engines": {
     "node": ">=16.0.0"
