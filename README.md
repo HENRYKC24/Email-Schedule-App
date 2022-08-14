@@ -16,6 +16,7 @@ This isn't a counseling session. This isn't a therapy system. It's the best firs
 - There are two categories of users: admin and user. They have different authorizations
 - A user can delete his account
 - A user can change his name provided he is logged in
+- A user can re-subscribe to the email messaging service when current subscription exhausts
 - Very secure
 
 ## Built With
@@ -25,6 +26,8 @@ This isn't a counseling session. This isn't a therapy system. It's the best firs
 - MongoD
 - Google APIs
 - Node Mailer
+- Mocha
+- Chai
 
 ## Live Demo
 
@@ -74,6 +77,9 @@ Run `npm run start:dev` to start the local server in development environment
 OR:
 
 Run `npm run start:prod` to start the local server in production environment
+
+# Test the application
+Run `npm test` from the terminal
 
 # API Documentation
 
