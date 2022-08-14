@@ -16,10 +16,11 @@ const port = process.env.PORT || 4000;
 let server = {};
 
 connection.connectToDatabase().then(() => {
-  console.log('Database connection successful');
-  server = app.listen(port, () => {
-    console.log(`App running on port ${port}`); // eslint-disable-line no-console
-  });
+  console.log('Database connection successful'); // eslint-disable-line no-console
+});
+
+server = app.listen(port, () => {
+  console.log(`App running on port ${port}`); // eslint-disable-line no-console
 });
 
 process.on('unhandledRejection', (err) => {

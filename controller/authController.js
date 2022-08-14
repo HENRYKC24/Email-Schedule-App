@@ -46,7 +46,6 @@ const sendResponseWithToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-  console.log('Came to signup controller.', req.body)
   cleanRequestData(req);
   const newUser = await User.create(req.body);
   sendResponseWithToken(newUser, 201, res);
