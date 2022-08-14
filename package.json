@@ -4,7 +4,7 @@
   "description": "An application for sending random email messages to clients",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --recursive --timeout 20000 --exit",
+    "test": "mocha --recursive --timeout 60000 --exit",
     "start:dev": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js"
