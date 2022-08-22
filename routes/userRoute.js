@@ -48,7 +48,7 @@ router.route('/').get(protect, restrictTo('admin'), getUsers);
 
 router
   .route('/:id')
-  .get(protect, restrictTo('admin'), protect, getUser)
-  .delete(restrictTo('admin'), protect, deleteUser);
+  .get(protect, restrictTo('admin'), getUser)
+  .delete(protect, restrictTo('admin'), deleteUser);
 
 module.exports = router;
